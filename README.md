@@ -58,9 +58,9 @@ The project already provides a `docker-compose.yml` example as well as two docke
 
 ##### Using Okteto
 
-I'm hosting this for free on a new provider I tried out called Okteto. It was really straightforward!
-Simply follow the installation instructions for their CLI.
-It's not neccessary, but if you want an `okteto.yml` file and set up a development environment,
+I'm hosting this for free on a new provider I tried out called [Okteto](https://www.okteto.com/). It was really straightforward!
+If you're new to it [follow the installation instructions for their CLI](https://www.okteto.com/docs/getting-started/).
+It's not necessary, but if you want an `okteto.yml` file and set up a development environment,
 then write `okteto init` in a terminal. 
 Otherwise, simply write `okteto deploy --build` both when initially publishing your applicaiton and every time you want to update
 it.
@@ -70,6 +70,6 @@ it.
 Unless you have changed the URL path in the configuration file, the calendar is available at
 `<http|https>://<your-server-url>/calendars/calendar_name?key=<authentication-key>`
 
-**This is the URL that you add to all your calendar managers!**
+**This is the URL that you add to all your calendar apps/managers!**
 
 if authentication is disabled (see the configuration file), you may omit the `?key` part.
