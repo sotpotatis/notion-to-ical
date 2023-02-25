@@ -1,0 +1,15 @@
+services:
+  server:
+    build:
+      dockerfile: Dockerfile.server
+    ports:
+      - "80:5000"
+    volumes:
+      - ical-storage:/data
+  updater:
+    build:
+      dockerfile: Dockerfile.updater
+    volumes:
+      - ical-storage:/data
+volumes:
+  ical-storage: # Main volume for storing iCals

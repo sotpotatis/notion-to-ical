@@ -1,0 +1,10 @@
+#Runs the updater script
+FROM python:3.10-slim-buster
+WORKDIR /app
+#Install requirements
+COPY requirements.txt requirements.txt
+RUN pip install -r "requirements.txt"
+#Copy other files
+COPY . .
+#Run script
+CMD python periodically_run_calendar_updater.py

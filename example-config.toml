@@ -1,0 +1,55 @@
+[general]
+default_timezone="Europe/Stockholm" # The default timezone if none is specified from a Notion API
+cleaning_factor=10 # How many script runs that an event can be non-existent for until it is assigned a new iCal UUID
+[periodic_runner]
+run_every=30 # How often to update calendars if running periodically_run_calendar_update.py (in minutes)
+healthchecks_uuid="uuid-here" # Healthchecks.io check UUID. Remove this line if you don't want to use it.
+[notion]
+#NOTE: Don't forget to share your database with your integration!
+token="" # Your Notion API token
+database_id="" # The Notion database ID where tasks are put
+[notion.keys]
+#Below, you set a mapping from key IDs in your Notion database to calendar entries.
+#You can try the following command:
+#`curl --request POST \
+#  --url https://api.notion.com/v1/databases/<YOUR-DATABASE-UUID>/query \
+#  --header 'Authorization: Bearer <YOUR-AUTHENTICATION-TOKEN>' \
+#  --header 'Notion-Version: 2022-06-28'`
+#to find out the IDs that you have.
+title="name" #The key of the field for event titles in your database.
+#description="description" #The key of the field for event descriptions. Optional!
+date="date" #The key of the date for events in your database.
+calendar="calendar" #The key that allows event sorting into different calendars in your database
+[notion.calendars]
+#Here, you put mappings from calendar ID to a calendar output file.
+#An example can be seen below.
+#The example configures two calendars; one for schoolwork and one for personal stuff.
+#The "fallback" key is set to fall back to the personal calendar if no key is set.
+fallback="CALENDAR-UUID-GOES-HERE-2"
+[notion.calendars.mappings.CALENDAR-UUID-GOES-HERE-1]
+    ics_file="school"
+   title="School calendar"
+   description="Calendar related to schoolwork."
+[notion.calendars.mappings.CALENDAR-UUID-GOES-HERE-2]
+   ics_file="personal"
+   title="Personal calendar"
+   description="Calendar related to personal stuff."
+#Below are settings for the server.
+#The server can both be run using the Flask development server
+#or with a WSGI server. The latter is a must for production
+[server]
+#Set the below to true if you want to use the development server.
+enabled=false
+debug=false
+#These settings are also for the development server
+debug_server_host="127.0.0.1"
+debug_server_port=80
+#Here, you can change the URL you're using to access calendars.
+#The only requirement is to have the string parameter requested_calendar
+#(like so <string:requested_calendar>) somewhere in your URL
+calendar_url="/calendars/<string:requested_calendar>"
+#Do you want anyone on the web to access your calendar without a password?
+#If not, I created an authroization requirement.
+[server.authentication]
+enabled=true #Set to True to enable authorization via the ?key=<password> parameter on your calendar_url
+key="<super-secret-authentication-key>" #Set the super secret authentication key to access your calendars (if authentication is enabled) here.
