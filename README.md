@@ -1,6 +1,6 @@
 # Notion-To-iCal
 
-A little service I made for getting my Notion tasks
+A little service I made for getting my Notion tasks (databse entries)
 as a subscribable iCal feed.
 
 ## Features
